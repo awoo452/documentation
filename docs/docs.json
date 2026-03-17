@@ -1,0 +1,179 @@
+[
+  {
+    "id": "documentation-standard",
+    "title": "Documentation Standard",
+    "summary": "Baseline structure for docs across the Rails apps so we can migrate content without rewriting it.",
+    "category": "Documentation",
+    "tags": ["standard", "json", "migration"],
+    "audience": ["internal"],
+    "status": "stable",
+    "updated_at": "2026-03-17",
+    "sections": [
+      {
+        "heading": "Why this format",
+        "body": [
+          "We keep docs in a single JSON file so content stays portable while the data model stays flexible.",
+          "The schema mirrors the fields we have used across other apps, without forcing a database migration yet."
+        ]
+      },
+      {
+        "heading": "Required fields",
+        "bullets": [
+          "Stable id used for URLs.",
+          "Title and summary for index cards.",
+          "Category for grouping.",
+          "Updated date in YYYY-MM-DD format.",
+          "At least one section so every doc has a clear body."
+        ]
+      },
+      {
+        "heading": "Optional structure",
+        "body": [
+          "Tags, audience, and status help filter docs later without changing the content format.",
+          "Sections can include paragraphs, bullets, steps, and code blocks as needed."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Docs schema", "path": "docs/README.md" }
+    ]
+  },
+  {
+    "id": "access-and-approval",
+    "title": "Access + Approval Gating",
+    "summary": "Standard approach for who can view and edit content in admin dashboards.",
+    "category": "Access",
+    "tags": ["auth", "admin", "devise"],
+    "audience": ["admin", "internal"],
+    "status": "stable",
+    "updated_at": "2026-03-17",
+    "sections": [
+      {
+        "heading": "Default policy",
+        "body": [
+          "Public pages stay readable without authentication.",
+          "Create/edit actions require a signed-in user with approval or admin access."
+        ]
+      },
+      {
+        "heading": "Approval workflow",
+        "steps": [
+          "User signs up through Devise.",
+          "Admin approves the user in the console or admin UI.",
+          "Approved users see the dashboard links and can manage content."
+        ]
+      },
+      {
+        "heading": "Notes",
+        "bullets": [
+          "Nav links should disappear for unapproved users.",
+          "Destructive actions should be admin-only unless explicitly allowed."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "calendar-behavior",
+    "title": "Calendar Behavior Notes",
+    "summary": "How we document calendar views so scheduling logic stays consistent across apps.",
+    "category": "Calendars",
+    "tags": ["simple_calendar", "scheduling"],
+    "audience": ["internal", "support"],
+    "status": "draft",
+    "updated_at": "2026-03-17",
+    "sections": [
+      {
+        "heading": "Month view",
+        "body": [
+          "Month calendars should explain what each block represents (events, tasks, rentals).",
+          "Multi-day items should display on every day in the range, not only the start day."
+        ]
+      },
+      {
+        "heading": "Daily view",
+        "bullets": [
+          "Show the selected date in the heading.",
+          "Display items in priority order when possible.",
+          "Include a short legend if colors or emojis encode meaning."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "media-and-embeds",
+    "title": "Media + Embeds",
+    "summary": "Consistent rules for images, YouTube embeds, and other media fields in docs.",
+    "category": "Content",
+    "tags": ["media", "images", "youtube"],
+    "audience": ["internal"],
+    "status": "stable",
+    "updated_at": "2026-03-17",
+    "sections": [
+      {
+        "heading": "Images",
+        "body": [
+          "Images can be listed as filenames or S3 keys depending on the app.",
+          "Keep images in a separate list so the body stays clean and exportable."
+        ]
+      },
+      {
+        "heading": "Embeds",
+        "bullets": [
+          "YouTube IDs should be stored without full URLs.",
+          "Start time should be optional and stored as seconds."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s3-media-proxy",
+    "title": "S3 Media + Proxy Fallback",
+    "summary": "Short standard note for apps that use S3 with an image proxy fallback.",
+    "category": "Infrastructure",
+    "tags": ["s3", "proxy", "images"],
+    "audience": ["internal"],
+    "status": "stable",
+    "updated_at": "2026-03-17",
+    "sections": [
+      {
+        "heading": "Expected behavior",
+        "bullets": [
+          "Prefer signed proxy URLs when proxy config is present.",
+          "Fallback to presigned S3 URLs when proxy config is missing or invalid."
+        ]
+      },
+      {
+        "heading": "Doc checklist",
+        "steps": [
+          "Record the expected object key pattern.",
+          "List required environment variables.",
+          "Call out the fallback behavior explicitly."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "doc-search-indexing",
+    "title": "Doc Search Indexing",
+    "summary": "How docs JSON becomes searchable through embeddings.",
+    "category": "Search",
+    "tags": ["embeddings", "pgvector"],
+    "audience": ["internal"],
+    "status": "stable",
+    "updated_at": "2026-03-17",
+    "sections": [
+      {
+        "heading": "Import flow",
+        "steps": [
+          "Docs are loaded from docs/docs.json.",
+          "Entries are flattened into a title + body string.",
+          "Records are stored in the documents table for embedding search."
+        ]
+      },
+      {
+        "heading": "Example",
+        "code": "bin/rails db:seed\nbin/rails embeddings:backfill"
+      }
+    ]
+  }
+]

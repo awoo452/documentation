@@ -1,0 +1,68 @@
+<main class="docs-shell">
+  <nav class="docs-breadcrumb">
+    <%= link_to "Docs", docs_path, class: "docs-breadcrumb-link" %>
+    <span class="docs-breadcrumb-sep">/</span>
+    <span><%= h(@doc.title) %></span>
+  </nav>
+
+  <article class="doc">
+    <header class="doc-header">
+      <p class="docs-kicker"><%= h(@doc.category) %></p>
+      <h1 class="doc-title"><%= h(@doc.title) %></h1>
+      <p class="doc-summary"><%= h(@doc.summary) %></p>
+      <div class="doc-meta">
+        <span class="doc-status"><%= h(@doc.status.capitalize) %></span>
+        <span>Updated <%= h(@doc.updated_at) %></span>
+        <span>Audience: <%= h(@doc.audience.join(", ")) %></span>
+      </div>
+      <div class="docs-tags">
+        <% @doc.tags.each do |tag| %>
+          <span class="docs-tag"><%= h(tag) %></span>
+        <% end %>
+      </div>
+    </header>
+
+    <% @doc.sections.each do |section| %>
+      <section class="doc-section">
+        <% if section["heading"].present? %>
+          <h2><%= h(section["heading"]) %></h2>
+        <% end %>
+
+        <% Array(section["body"]).each do |paragraph| %>
+          <p><%= h(paragraph) %></p>
+        <% end %>
+
+        <% if section["bullets"].present? %>
+          <ul>
+            <% section["bullets"].each do |bullet| %>
+              <li><%= h(bullet) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <% if section["steps"].present? %>
+          <ol>
+            <% section["steps"].each do |step| %>
+              <li><%= h(step) %></li>
+            <% end %>
+          </ol>
+        <% end %>
+
+        <% if section["code"].present? %>
+          <pre><code><%= h(section["code"]) %></code></pre>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @doc.links.present? %>
+      <section class="doc-section">
+        <h2>Related paths</h2>
+        <ul>
+          <% @doc.links.each do |link| %>
+            <li><span class="mono"><%= h(link["path"]) %></span> — <%= h(link["label"]) %></li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+  </article>
+</main>
