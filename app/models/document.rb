@@ -1,12 +1,12 @@
 class Document < ApplicationRecord
   def embedding_input
-    [title, body].compact.join("\n")
+    [ title, body ].compact.join("\n")
   end
 
   def generate_embedding!
     vector = EmbeddingService.embed(embedding_input)
     vector_literal = self.class.send(:vector_literal_for, vector)
-    self.class.where(id: id).update_all(["embedding = ?::vector", vector_literal])
+    self.class.where(id: id).update_all([ "embedding = ?::vector", vector_literal ])
     reload
   end
 
