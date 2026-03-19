@@ -1,6 +1,11 @@
 module Docs
   class Importer
-    def self.import!
+    def self.import!(force: false)
+      if Docs::Store.source == "database" && !force
+        Rails.logger.info("Docs import skipped: DOCS_SOURCE=database.")
+        return
+      end
+
       unless ActiveRecord::Base.connection.data_source_exists?("documents")
         Rails.logger.warn("Docs import skipped: documents table missing. Run db:migrate.")
         return

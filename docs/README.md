@@ -4,6 +4,13 @@ This app uses `docs/docs.json` as the source of truth for documentation. The
 JSON shape is intentionally structured so we can migrate to database columns
 later without changing the content format.
 
+## Source of Truth
+
+By default, docs render from `docs/docs.json`. To use the database instead, set
+`DOCS_SOURCE=database`. In database mode, `Docs::Store` maps the `documents`
+table into the same entry shape. When no `sections` column exists, it will
+split `body` into paragraphs and treat any `images` column as section media.
+
 ## Schema
 
 Each entry is an object with the following fields:

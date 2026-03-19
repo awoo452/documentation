@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.7] - 2026-03-18
+### Added
+- Allow docs rendering to use database records via `DOCS_SOURCE=database`.
+- Documented how to seed the docs database when running in JSON or database mode.
+- Allow forcing JSON seeding into the documents table via `DOCS_SEED_FROM_JSON=1`.
+### Changed
+- Skip JSON-to-DB docs import when database mode is active.
+
 ## [0.0.6] - 2026-03-18
 ### Changed
 - Require explicit AWS credentials before generating S3 media URLs (fallback to local assets otherwise).

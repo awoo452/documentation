@@ -18,6 +18,9 @@ can migrate into database columns later without rewriting content.
 - Schema and rendering rules live in `docs/README.md`.
 - Content lives in `docs/docs.json`.
 - `db:seed` imports JSON entries into the `documents` table.
+- Set `DOCS_SOURCE=database` to render docs directly from the `documents` table
+  instead of JSON (defaults to `json`).
+- When `DOCS_SOURCE=database`, the JSON importer is skipped during seeding.
 
 ## Prerequisites
 
@@ -31,6 +34,13 @@ can migrate into database columns later without rewriting content.
 2. `bin/rails db:drop db:create db:migrate`
 3. `bin/rails db:seed`
 4. `bin/rails embeddings:backfill` (optional)
+
+## Seeding the Docs DB
+
+- `bin/rails db:seed` imports `docs/docs.json` into the `documents` table.
+- If you are running with `DOCS_SOURCE=database`, the importer is skipped.
+  To seed from JSON anyway, run:
+  `DOCS_SEED_FROM_JSON=1 bin/rails db:seed`
 
 ## Docs UI
 
