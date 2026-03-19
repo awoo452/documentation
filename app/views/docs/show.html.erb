@@ -51,6 +51,44 @@
         <% if section["code"].present? %>
           <pre><code><%= h(section["code"]) %></code></pre>
         <% end %>
+
+        <% images = Array(section["images"]) %>
+        <% videos = Array(section["videos"]) %>
+        <% if images.any? || videos.any? %>
+          <div class="doc-media">
+            <% images.each_with_index do |image, index| %>
+              <figure class="doc-media-item">
+                <img src="<%= docs_image_src(image) %>" alt="<%= h(docs_image_alt(image, index + 1)) %>" loading="lazy" />
+                <% caption = docs_image_caption(image) %>
+                <figcaption class="doc-media-caption">
+                  Image <%= index + 1 %><% if caption.present? %> — <%= h(caption) %><% end %>
+                </figcaption>
+              </figure>
+            <% end %>
+
+            <% videos.each_with_index do |video, index| %>
+              <% embed_url = docs_youtube_embed_url(video) %>
+              <% caption = docs_video_caption(video) %>
+              <div class="doc-media-item">
+                <% if embed_url.present? %>
+                  <iframe
+                    class="doc-media-video"
+                    width="560"
+                    height="315"
+                    src="<%= embed_url %>"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                  <p class="doc-media-caption">Video <%= index + 1 %><% if caption.present? %> — <%= h(caption) %><% end %></p>
+                <% else %>
+                  <p class="doc-media-caption">Video <%= index + 1 %> — unsupported URL</p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </section>
     <% end %>
 

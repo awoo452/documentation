@@ -219,6 +219,29 @@ code {
   font-size: clamp(2rem, 3.6vw, 3rem);
 }
 
+.doc-media {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.doc-media-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.doc-media-video {
+  max-width: 100%;
+  border-radius: 16px;
+}
+
+.doc-media-caption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .doc-summary {
   color: var(--muted);
   font-size: 1.1rem;

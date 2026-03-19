@@ -22,6 +22,8 @@ Each entry is an object with the following fields:
   - `bullets` (array of strings, optional)
   - `steps` (array of strings, optional)
   - `code` (string, optional)
+- `images` (array, optional): strings or objects with `src` or `key`, plus `alt`, `caption`
+- `videos` (array, optional): strings or objects with `url`, plus `caption` (YouTube URLs embed)
 - `links` (array, optional): Objects with `label` and `path`.
 
 ## Rendering Rules
@@ -30,6 +32,13 @@ Each entry is an object with the following fields:
 - `bullets` renders as an unordered list.
 - `steps` renders as an ordered list.
 - `code` renders as a code block.
+- `images` render as labeled figures (fallback to `logo.png` when missing).
+- `videos` render as labeled YouTube embeds when the URL matches.
+
+### S3 Media Keys
+
+If you want images to resolve via S3, provide a `key` (or a `src` starting with `s3://` or `s3:` and containing the key path only, not the bucket).
+The app uses the same `IMAGE_PROXY_BASE_URL` / `IMAGE_PROXY_SIGNING_KEY` pattern as `s3-image-storage`, with a presigned S3 URL fallback when the proxy is not configured.
 
 ## Importing Into Search
 

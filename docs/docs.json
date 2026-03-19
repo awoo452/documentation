@@ -4,8 +4,14 @@
     "title": "Documentation Standard",
     "summary": "Baseline structure for docs across the Rails apps so we can migrate content without rewriting it.",
     "category": "Documentation",
-    "tags": ["standard", "json", "migration"],
-    "audience": ["internal"],
+    "tags": [
+      "standard",
+      "json",
+      "migration"
+    ],
+    "audience": [
+      "internal"
+    ],
     "status": "stable",
     "updated_at": "2026-03-17",
     "sections": [
@@ -35,7 +41,10 @@
       }
     ],
     "links": [
-      { "label": "Docs schema", "path": "docs/README.md" }
+      {
+        "label": "Docs schema",
+        "path": "docs/README.md"
+      }
     ]
   },
   {
@@ -43,8 +52,15 @@
     "title": "Access + Approval Gating",
     "summary": "Standard approach for who can view and edit content in admin dashboards.",
     "category": "Access",
-    "tags": ["auth", "admin", "devise"],
-    "audience": ["admin", "internal"],
+    "tags": [
+      "auth",
+      "admin",
+      "devise"
+    ],
+    "audience": [
+      "admin",
+      "internal"
+    ],
     "status": "stable",
     "updated_at": "2026-03-17",
     "sections": [
@@ -77,8 +93,14 @@
     "title": "Calendar Behavior Notes",
     "summary": "How we document calendar views so scheduling logic stays consistent across apps.",
     "category": "Calendars",
-    "tags": ["simple_calendar", "scheduling"],
-    "audience": ["internal", "support"],
+    "tags": [
+      "simple_calendar",
+      "scheduling"
+    ],
+    "audience": [
+      "internal",
+      "support"
+    ],
     "status": "draft",
     "updated_at": "2026-03-17",
     "sections": [
@@ -104,8 +126,14 @@
     "title": "Media + Embeds",
     "summary": "Consistent rules for images, YouTube embeds, and other media fields in docs.",
     "category": "Content",
-    "tags": ["media", "images", "youtube"],
-    "audience": ["internal"],
+    "tags": [
+      "media",
+      "images",
+      "youtube"
+    ],
+    "audience": [
+      "internal"
+    ],
     "status": "stable",
     "updated_at": "2026-03-17",
     "sections": [
@@ -130,8 +158,14 @@
     "title": "S3 Media + Proxy Fallback",
     "summary": "Short standard note for apps that use S3 with an image proxy fallback.",
     "category": "Infrastructure",
-    "tags": ["s3", "proxy", "images"],
-    "audience": ["internal"],
+    "tags": [
+      "s3",
+      "proxy",
+      "images"
+    ],
+    "audience": [
+      "internal"
+    ],
     "status": "stable",
     "updated_at": "2026-03-17",
     "sections": [
@@ -157,8 +191,13 @@
     "title": "Doc Search Indexing",
     "summary": "How docs JSON becomes searchable through embeddings.",
     "category": "Search",
-    "tags": ["embeddings", "pgvector"],
-    "audience": ["internal"],
+    "tags": [
+      "embeddings",
+      "pgvector"
+    ],
+    "audience": [
+      "internal"
+    ],
     "status": "stable",
     "updated_at": "2026-03-17",
     "sections": [
@@ -175,5 +214,45 @@
         "code": "bin/rails db:seed\nbin/rails embeddings:backfill"
       }
     ]
+  },
+  {
+    "id": "media-example",
+    "title": "Media Example",
+    "summary": "Example entry showing how images and videos render on a doc page.",
+    "category": "Documentation",
+    "tags": [
+      "media",
+      "images",
+      "video"
+    ],
+    "audience": [
+      "internal"
+    ],
+    "status": "stable",
+    "updated_at": "2026-03-18",
+    "sections": [
+      {
+        "heading": "Images + Video",
+        "body": [
+          "Media can be attached per section using images and videos arrays.",
+          "Images use local assets or remote URLs, while videos embed YouTube links."
+        ],
+        "images": [
+          {
+            "key": "docs/media-example.png",
+            "src": "logo.png",
+            "alt": "Documentation placeholder image",
+            "caption": "S3 key (fallbacks to local logo if not configured)."
+          }
+        ],
+        "videos": [
+          {
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "caption": "Rick roll demo for the YouTube embed."
+          }
+        ]
+      }
+    ],
+    "links": []
   }
 ]
