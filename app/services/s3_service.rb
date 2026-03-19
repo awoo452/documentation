@@ -5,6 +5,8 @@ require "aws-sdk-s3"
 class S3Service
   def initialize
     creds = s3_creds
+    raise Aws::Errors::MissingCredentialsError, "AWS credentials missing" unless creds[:access_key_id].present? && creds[:secret_access_key].present?
+
     @s3 = Aws::S3::Resource.new(s3_options(creds))
     @bucket = @s3.bucket(creds[:bucket])
   end
