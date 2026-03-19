@@ -9,6 +9,19 @@
       <span>Source: <span class="mono">docs/docs.json</span></span>
       <span>Entries: <%= @docs.count %></span>
     </div>
+    <%= form_with url: docs_path, method: :get, local: true do |form| %>
+      <div>
+        <%= form.label :q, "Search docs" %>
+        <%= form.search_field :q, value: @query, placeholder: "Search docs" %>
+        <%= form.submit "Search" %>
+        <% if @query.present? %>
+          <%= link_to "Clear", docs_path %>
+        <% end %>
+      </div>
+      <% if @query.present? %>
+        <p><%= pluralize(@docs.count, "result") %> for "<%= h(@query) %>"</p>
+      <% end %>
+    <% end %>
   </header>
 
   <% @categories.each do |category, docs| %>
