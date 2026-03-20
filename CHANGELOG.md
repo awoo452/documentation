@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.8] - 2026-03-19
+### Removed
+- Removed application CSS and stylesheet tag to keep the template backend-only.
+- Removed view class attributes to keep the template backend-only.
+
 ## [0.0.7] - 2026-03-18
 ### Added
 - Allow docs rendering to use database records via `DOCS_SOURCE=database`.

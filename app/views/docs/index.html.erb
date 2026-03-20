@@ -1,12 +1,12 @@
-<main class="docs-shell">
-  <header class="docs-hero">
-    <p class="docs-kicker">Documentation</p>
-    <h1 class="docs-title">Shared Doc Standard</h1>
-    <p class="docs-subtitle">
+<main>
+  <header>
+    <p>Documentation</p>
+    <h1>Shared Doc Standard</h1>
+    <p>
       A portable documentation format that keeps content consistent across the Rails apps.
     </p>
-    <div class="docs-hero-meta">
-      <span>Source: <span class="mono">docs/docs.json</span></span>
+    <div>
+      <span>Source: <span>docs/docs.json</span></span>
       <span>Entries: <%= @docs.count %></span>
     </div>
     <%= form_with url: docs_path, method: :get, local: true do |form| %>
@@ -25,26 +25,26 @@
   </header>
 
   <% @categories.each do |category, docs| %>
-    <section class="docs-section">
-      <div class="docs-section-header">
+    <section>
+      <div>
         <h2><%= h(category) %></h2>
-        <span class="docs-section-count"><%= docs.count %> docs</span>
+        <span><%= docs.count %> docs</span>
       </div>
-      <div class="docs-grid">
+      <div>
         <% docs.each do |doc| %>
-          <article class="docs-card">
-            <div class="docs-card-top">
-              <p class="docs-card-kicker"><%= h(doc.status.capitalize) %> · <%= h(doc.audience.join(", ")) %></p>
+          <article>
+            <div>
+              <p><%= h(doc.status.capitalize) %> · <%= h(doc.audience.join(", ")) %></p>
               <h3><%= link_to h(doc.title), doc_path(doc.id) %></h3>
-              <p class="docs-card-summary"><%= h(doc.summary) %></p>
+              <p><%= h(doc.summary) %></p>
             </div>
-            <div class="docs-card-bottom">
-              <div class="docs-tags">
+            <div>
+              <div>
                 <% doc.tags.each do |tag| %>
-                  <span class="docs-tag"><%= h(tag) %></span>
+                  <span><%= h(tag) %></span>
                 <% end %>
               </div>
-              <p class="docs-updated">Updated <%= h(doc.updated_at) %></p>
+              <p>Updated <%= h(doc.updated_at) %></p>
             </div>
           </article>
         <% end %>
